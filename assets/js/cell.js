@@ -34,6 +34,10 @@ class Cell {
         return this.flag;
     }
 
+    isZero() {
+        return this.value === 0;
+    }
+
     setValue(value) {
         this.value = value;
     }
@@ -46,6 +50,28 @@ class Cell {
         return this.value;
     }
 
+    reveal() {
+        this.visible = true;
+    }
+
+    revealZeros(stack) {
+        if (stack.includes(this)) {
+            return;
+        }
+        stack.push(this);
+        this.reveal();
+
+        Board.getDirections().forEach(direction => {
+            const neighborCell = this.board.cellByCoords(this.col + direction.dcol, this.row + direction.drow);
+            if (neighborCell) {
+                neighborCell.reveal();
+            }
+            if (neighborCell && neighborCell.isZero()) {
+                neighborCell.revealZeros(stack);
+            }
+        })
+    }
+
     updateValue() {
         let neighborBombCount = 0;
         Board.getDirections().forEach(direction => {
@@ -55,7 +81,6 @@ class Cell {
             }
         })
         this.setValue(neighborBombCount);
-        this.visible = true;
     }
 
     static getLength() {

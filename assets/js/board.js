@@ -1,5 +1,6 @@
 class Board {
-    constructor() {
+    constructor(game) {
+        this.game = game;
         this.cols = 30;
         this.rows = 16;
         this.generated = false;
@@ -39,6 +40,15 @@ class Board {
         if (clickedCell.isFlagged()) {
             return;
         }
+        if (clickedCell.isBomb()) {
+            this.game.failedGame();
+            return;
+        }
+        if (clickedCell.isZero()) {
+            clickedCell.revealZeros([]);
+            return;
+        }
+        clickedCell.reveal();
     }
 
     rightClick(coords) {

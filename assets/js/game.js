@@ -1,9 +1,13 @@
 class Game {
     constructor() {
         this.fps = 30;
-        this.board = new Board();
+        this.board = new Board(this);
         this.gameOver = false;
         this.addEventListeners();
+    }
+
+    failedGame() {
+        this.gameOver = true;
     }
 
     draw() {
@@ -31,6 +35,7 @@ class Game {
 
     handelKeyClick(key) {
         if (key === 'r') {
+            this.gameOver = false;
             this.board.reset();
         }
     } 
