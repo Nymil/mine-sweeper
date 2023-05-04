@@ -41,7 +41,9 @@ class Board {
             return;
         }
         if (clickedCell.isBomb()) {
-            this.game.failedGame();
+            clickedCell.setWrong();
+            this.revealBombs();
+            this.game.setGameOver();
             return;
         }
         if (clickedCell.isZero()) {
@@ -49,6 +51,19 @@ class Board {
             return;
         }
         clickedCell.reveal();
+
+        if (this.fullyRevealed()) {
+            this.game.setGameOver()
+            this.cells.forEach(cell => cell.reveal());
+        }
+    }
+
+    revealBombs() {
+        this.cells.filter(cell => cell.isBomb()).forEach(cell => cell.reveal());
+    }
+
+    fullyRevealed() {
+        return this.cells.filter(cell => cell.isVisible()).length === this.cells.filter(cell => !cell.isBomb());
     }
 
     rightClick(coords) {

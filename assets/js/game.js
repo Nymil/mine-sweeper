@@ -6,7 +6,7 @@ class Game {
         this.addEventListeners();
     }
 
-    failedGame() {
+    setGameOver() {
         this.gameOver = true;
     }
 

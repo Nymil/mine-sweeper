@@ -10,11 +10,20 @@ class Cell {
         this.value = null;
         this.visible = false;
         this.flag = false;
+        this.wrong = false;
     }
 
     draw() {
         const borderColor = this.visible ? '#78A5A3' : '#CE5A57';
-        const cellColor = this.visible ? '#AAAAAA' : '#E1B16A';
+        
+        let cellColor;
+        if (this.wrong) {
+            cellColor = '#ad2b1a';
+        } else if (this.visible) {
+            cellColor = '#AAAAAA';
+        } else {
+            cellColor = '#E1B16A';
+        }
         
         drawRect(cellColor, [this.col * Cell.getLength(), this.row * Cell.getLength(), Cell.getLength(), Cell.getLength()]);
         drawRect(borderColor, [this.col * Cell.getLength(), this.row * Cell.getLength(), Cell.getLength(), Cell.getLength()], 2);
@@ -24,6 +33,12 @@ class Cell {
         } else if (this.flag) {
             drawCircle('#CE5A57', [this.col * Cell.getLength() + Cell.getLength() / 2, this.row * Cell.getLength() + Cell.getLength() / 2], 10);
         }
+
+
+    }
+
+    setWrong() {
+        this.wrong = true;
     }
 
     toggleFlag() {
