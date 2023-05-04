@@ -52,7 +52,11 @@ class Board {
     }
 
     rightClick(coords) {
-
+        const clickedCell = this.cellByCoords(coords.col, coords.row);
+        if (clickedCell.isVisible()) {
+            return;
+        }
+        clickedCell.toggleFlag();
     }
 
     generate(coords) {

@@ -26,6 +26,10 @@ class Cell {
         }
     }
 
+    toggleFlag() {
+        this.flag = !this.flag;
+    }
+
     isVisible() {
         return this.visible;
     }

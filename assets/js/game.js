@@ -18,7 +18,7 @@ class Game {
         setInterval(() => this.draw(), 1000 / this.fps);
     }
 
-    handleWindowClick(e) {
+    handleClick(e) {
         if (e.target.nodeName !== 'CANVAS' || this.gameOver) {
             return;
         }
@@ -28,7 +28,8 @@ class Game {
 
         if (e.which === 1) {
             this.board.leftClick(boardCoords);
-        } else if (e.which === 2) {
+        }
+        if (e.which === 3) {
             this.board.rightClick(boardCoords);
         }
     }
@@ -50,7 +51,8 @@ class Game {
     }
 
     addEventListeners() {
-        document.addEventListener('click', (e) => this.handleWindowClick(e));
+        document.addEventListener('mousedown', (e) => this.handleClick(e));
         document.addEventListener('keydown', (e) => this.handelKeyClick(e.key.toLowerCase()));
+        document.querySelector('canvas').addEventListener('contextmenu', (e) => e.preventDefault());
     }
 }
