@@ -23,19 +23,17 @@ class Board {
 
     leftClick(coords) {
         if (!self.generated) {
-            this.generate();
+            this.generate(coords);
             this.generated = true;
         }
-
-        console.log(coords);
-    }
-
-    generate() {
-        
     }
 
     rightClick(coords) {
 
+    }
+
+    generate(coords) {
+        
     }
 
     static coordsToBoardCoords(coords) {
