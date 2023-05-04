@@ -23,11 +23,12 @@ class Game {
         }
 
         const mouseCoords = this.getMouseCoords(e);
+        const boardCoords = Board.coordsToBoardCoords(mouseCoords);
 
         if (e.which === 1) {
-            this.board.leftClick(mouseCoords);
+            this.board.leftClick(boardCoords);
         } else if (e.which === 2) {
-            this.board.rightClick(mouseCoords);
+            this.board.rightClick(boardCoords);
         }
     }
 

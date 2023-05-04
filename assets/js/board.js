@@ -2,6 +2,7 @@ class Board {
     constructor() {
         this.cols = 30;
         this.rows = 16;
+        this.generated = false;
         this.cells = [];
         this.fillCells();
     }
@@ -21,14 +22,23 @@ class Board {
     }
 
     leftClick(coords) {
+        if (!self.generated) {
+            this.generate();
+            this.generated = true;
+        }
 
+        console.log(coords);
+    }
+
+    generate() {
+        
     }
 
     rightClick(coords) {
 
     }
 
-    static coordsToCell(coords) {
+    static coordsToBoardCoords(coords) {
         return {
             col: Math.floor(coords.x / Cell.getLength()),
             row: Math.floor(coords.y / Cell.getLength())
