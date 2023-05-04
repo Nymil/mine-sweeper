@@ -30,8 +30,8 @@ class Board {
 
     static coordsToCell(coords) {
         return {
-            col: coords.x / Cell.getLength(),
-            row: coords.y / Cell.getLength()
+            col: Math.floor(coords.x / Cell.getLength()),
+            row: Math.floor(coords.y / Cell.getLength())
         };
     }
 }

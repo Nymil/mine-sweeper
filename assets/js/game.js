@@ -10,7 +10,7 @@ class Game {
     }
 
     draw() {
-        drawRect('black', [0, 0, _$canvas.width, _$canvas.height]);
+        this.board.draw();
     }
 
     run() {
