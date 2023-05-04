@@ -3,5 +3,13 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    console.log("js connected");
+    initiateCanvas();
+}
+
+function initiateCanvas() {
+    _$canvas = document.querySelector('canvas');
+    _ctx = _$canvas.getContext('2d');
+    _$canvas.width = 1400;
+    _$canvas.height = _$canvas.width * 16 / 30;
+    drawRect('black', [0, 0, _$canvas.width, _$canvas.height]);
 }
