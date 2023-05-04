@@ -3,7 +3,11 @@ class Cell {
         this.board = board;
         this.col = col;
         this.row = row;
-        this.value = 3;
+        this.reset();
+    }
+
+    reset() {
+        this.value = null;
         this.visible = false;
         this.flag = false;
     }
@@ -20,6 +24,14 @@ class Cell {
         } else if (this.flag) {
             drawCircle('#CE5A57', [this.col * Cell.getLength() + Cell.getLength() / 2, this.row * Cell.getLength() + Cell.getLength() / 2], 10);
         }
+    }
+
+    isVisible() {
+        return this.visible;
+    }
+
+    isFlagged() {
+        return this.flag;
     }
 
     setValue(value) {

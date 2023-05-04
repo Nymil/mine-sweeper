@@ -1,12 +1,9 @@
 class Game {
     constructor() {
         this.fps = 30;
-        this.reset();
-        this.addEventListeners();
-    }
-
-    reset() {
         this.board = new Board();
+        this.gameOver = false;
+        this.addEventListeners();
     }
 
     draw() {
@@ -18,7 +15,7 @@ class Game {
     }
 
     handleWindowClick(e) {
-        if (e.target.nodeName !== 'CANVAS') {
+        if (e.target.nodeName !== 'CANVAS' || this.gameOver) {
             return;
         }
 
@@ -32,6 +29,12 @@ class Game {
         }
     }
 
+    handelKeyClick(key) {
+        if (key === 'r') {
+            this.board.reset();
+        }
+    } 
+
     getMouseCoords(e) {
         var rect = _$canvas.getBoundingClientRect();
         return {
@@ -43,5 +46,6 @@ class Game {
 
     addEventListeners() {
         document.addEventListener('click', (e) => this.handleWindowClick(e));
+        document.addEventListener('keydown', (e) => this.handelKeyClick(e.key.toLowerCase()));
     }
 }

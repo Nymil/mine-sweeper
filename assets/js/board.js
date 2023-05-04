@@ -8,6 +8,11 @@ class Board {
         this.fillCells();
     }
 
+    reset() {
+        this.generated = false;
+        this.cells.forEach(cell => cell.reset());
+    }
+
     fillCells() {
         this.cells = [];
         for (let row = 0; row < this.rows; row++) {
@@ -23,9 +28,16 @@ class Board {
     }
 
     leftClick(coords) {
-        if (!self.generated) {
+        if (!this.generated) {
             this.generate(coords);
             this.generated = true;
+        }
+        const clickedCell = this.cellByCoords(coords.col, coords.row);
+        if (clickedCell.isVisible()) {
+            return;
+        }
+        if (clickedCell.isFlagged()) {
+            return;
         }
     }
 
