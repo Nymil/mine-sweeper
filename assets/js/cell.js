@@ -1,5 +1,6 @@
 class Cell {
-    constructor(col, row) {
+    constructor(board, col, row) {
+        this.board = board;
         this.col = col;
         this.row = row;
         this.value = 3;
@@ -19,6 +20,30 @@ class Cell {
         } else if (this.flag) {
             drawCircle('#CE5A57', [this.col * Cell.getLength() + Cell.getLength() / 2, this.row * Cell.getLength() + Cell.getLength() / 2], 10);
         }
+    }
+
+    setValue(value) {
+        this.value = value;
+    }
+
+    isBomb() {
+        return this.value === '*';
+    }
+
+    getValue() {
+        return this.value;
+    }
+
+    updateValue() {
+        let neighborBombCount = 0;
+        Board.getDirections().forEach(direction => {
+            const neighborCell = this.board.cellByCoords(this.col + direction.dcol, this.row + direction.drow);
+            if (neighborCell && neighborCell.isBomb()) {
+                neighborBombCount += 1;
+            }
+        })
+        this.setValue(neighborBombCount);
+        this.visible = true;
     }
 
     static getLength() {
