@@ -16,6 +16,10 @@ class Board {
         }
     }
 
+    draw() {
+        this.cells.forEach(cell => cell.draw());
+    }
+
     leftClick(coords) {
 
     }
